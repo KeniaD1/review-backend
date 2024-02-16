@@ -2,8 +2,11 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 
+const makeUpController = require("./controllers/makeupController")
+
 app.use(express.json())
 app.use(cors())
+app.use("/makeup", makeUpController)
 
 
 app.get("/", (req, res) => {
