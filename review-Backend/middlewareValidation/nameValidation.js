@@ -1,6 +1,6 @@
 function checkName (req, res , next) {
 
-    const name  = req.body.productname
+    const name  = req.body.product_name
 
     if (typeof name === "string"){
         const nameArr = name.split(" ");
