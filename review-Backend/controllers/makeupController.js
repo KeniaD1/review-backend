@@ -42,7 +42,12 @@ makeUp.put('/:makeupID', checkName, async (req, res) => {
 
     const updatedMakeup = await updateMakeup(makeupID, body)
 
+    if(updatedMakeup.id){
+
     res.status(200).json(updatedMakeup)
+    }else{
+        res.status(404).json({error: updatedMakeup})
+    }
 })
 
 
