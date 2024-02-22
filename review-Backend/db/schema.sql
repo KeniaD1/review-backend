@@ -9,6 +9,6 @@ CREATE TABLE makeup (
 id SERIAL PRIMARY KEY , 
 product_name TEXT NOT NULL,
 price INT,
-intock BOOLEAN,
+instock BOOLEAN,
 color TEXT NOT NULL
 );

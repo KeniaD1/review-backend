@@ -6,7 +6,7 @@ const { checkName } = require("../middlewareValidation/nameValidation")
 
 const { instockCheck } = require('../middlewareValidation/instockCheck')
 
-const {  getAllMakeup } = require('../queries/makeup')
+const {  getAllMakeup , getOneMakeup } = require('../queries/makeup')
 
 
 makeUp.get("/", async (req, res) => {
@@ -15,10 +15,11 @@ makeUp.get("/", async (req, res) => {
 })
 
 
-makeUp.get("/:makeupID", (req, res) => {
+makeUp.get("/:makeupID", async (req, res) => {
     const makeupID = req.params.makeupID
     if (Number(makeupID)) {
-        res.status(200).json({ message: makeupID })
+        const oneMakeup = await getOneMakeup(makeupID)
+        res.status(200).json(oneMakeup)
     }
     else {
 
