@@ -6,7 +6,7 @@ const { checkName } = require("../middlewareValidation/nameValidation")
 
 const { instockCheck } = require('../middlewareValidation/instockCheck')
 
-const {  getAllMakeup , getOneMakeup, updateMakeup, deleteMakeup } = require('../queries/makeup')
+const {  getAllMakeup , getOneMakeup, updateMakeup, deleteMakeup , createMakeup} = require('../queries/makeup')
 
 
 makeUp.get("/", async (req, res) => {
@@ -28,11 +28,17 @@ makeUp.get("/:makeupID", async (req, res) => {
 })
 
 
-makeUp.post("/", checkName, instockCheck, (req, res) => {
+makeUp.post("/", checkName,  async  (req, res) => {
     const body = req.body
     // console.log(body)
-    res.status(200).json(body)
 
+    const newMakeup = await createMakeup(body)
+
+    if (newMakeup.id){
+    res.status(200).json(newMakeup)
+    }else{
+        res.status(500).json(newMakeup)
+    }
 })
 
 makeUp.put('/:makeupID', checkName, async (req, res) => {

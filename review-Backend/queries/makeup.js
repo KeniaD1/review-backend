@@ -38,7 +38,7 @@ const updateMakeup = async (makeupId, body) => {
 
 const deleteMakeup = async (makeupId) => {
 
-    
+
     try {
         const deletedMakeup = db.one("DELETE FROM makeup WHERE id=$1 RETURNING *", makeupId)
         return deletedMakeup
@@ -50,11 +50,24 @@ const deleteMakeup = async (makeupId) => {
 
 }
 
+const createMakeup = async (valueObj) => {
+
+    try {
+
+        const newMakeup = await db.one("INSERT INTO makeup (product_name,price,instock,color )VALUES ($1,$2,$3,$4) RETURNING * ", [valueObj.product_name, valueObj.price, valueObj.instock, valueObj.color])
+        return newMakeup
+    } catch (error) {
+        return error
+    }
+
+}
+
 
 
 module.exports = {
     getAllMakeup,
     getOneMakeup,
     updateMakeup,
-    deleteMakeup
+    deleteMakeup,
+    createMakeup
 }
