@@ -35,8 +35,26 @@ const updateMakeup = async (makeupId, body) => {
     }
 }
 
+
+const deleteMakeup = async (makeupId) => {
+
+    
+    try {
+        const deletedMakeup = db.one("DELETE FROM makeup WHERE id=$1 RETURNING *", makeupId)
+        return deletedMakeup
+
+    } catch (error) {
+        return error
+    }
+
+
+}
+
+
+
 module.exports = {
     getAllMakeup,
     getOneMakeup,
-    updateMakeup
+    updateMakeup,
+    deleteMakeup
 }

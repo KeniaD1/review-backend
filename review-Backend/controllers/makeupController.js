@@ -6,7 +6,7 @@ const { checkName } = require("../middlewareValidation/nameValidation")
 
 const { instockCheck } = require('../middlewareValidation/instockCheck')
 
-const {  getAllMakeup , getOneMakeup, updateMakeup } = require('../queries/makeup')
+const {  getAllMakeup , getOneMakeup, updateMakeup, deleteMakeup } = require('../queries/makeup')
 
 
 makeUp.get("/", async (req, res) => {
@@ -52,16 +52,24 @@ makeUp.put('/:makeupID', checkName, async (req, res) => {
 
 
 
-makeUp.delete("/:makeupID", (req, res) => {
+makeUp.delete("/:makeupID", async (req, res) => {
 
     const makeupID = req.params.makeupID
 
     if (Number(makeupID)) {
-        res.status(200).json({ message: `delete ${makeupID}` })
-    }
-    else {
+
+        const deletedMakeup = await deleteMakeup(makeupID)
+
+        if(deletedMakeup.id){
+            res.status(200).json(deletedMakeup)
+        }else {
+            res.status(404).json(deletedMakeup)
+
+        }
+    }else {
 
         res.status(404).json({ error: " makeup id must be numeric" })
+    
     }
 })
 
