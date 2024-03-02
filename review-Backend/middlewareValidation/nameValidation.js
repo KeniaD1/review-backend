@@ -19,7 +19,6 @@ function checkName (req, res , next) {
 
         next()
 
-
     }else {
         res.status(404).json({
             Error : "name must be a string "
