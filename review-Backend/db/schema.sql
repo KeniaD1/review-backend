@@ -10,5 +10,6 @@ id SERIAL PRIMARY KEY ,
 product_name TEXT NOT NULL,
 price INT,
 instock BOOLEAN,
-color TEXT NOT NULL
+color TEXT NOT NULL, 
+image_url TEXT NOT NULL
 );
