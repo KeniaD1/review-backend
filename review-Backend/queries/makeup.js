@@ -26,7 +26,7 @@ const getOneMakeup = async (makeupId) => {
 const updateMakeup = async (makeupId, body) => {
 
     try {
-        const updatedMakeup = await db.one("UPDATE makeup SET product_name=$1 , price=$2, instock=$3, color=$4 image_url=$5 WHERE id=$6 RETURNING *", [body.product_name,
+        const updatedMakeup = await db.one("UPDATE makeup SET product_name=$1, price=$2, instock=$3, color=$4, image_url=$5 WHERE id=$6 RETURNING *", [body.product_name,
         body.price, body.instock, body.color, body.image_url, makeupId])
         return updatedMakeup
 

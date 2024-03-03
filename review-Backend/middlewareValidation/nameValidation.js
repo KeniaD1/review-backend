@@ -5,18 +5,19 @@ function checkName (req, res , next) {
     if (typeof name === "string"){
         const nameArr = name.split(" ");
 
-        const firstName = nameArr[0];
+        let formattedNameArr = []
 
-        const lastName = nameArr[1].toUpperCase();
+        for ( let name of nameArr) {
+            const firstNameLetter = name.charAt(0).toUpperCase();
+            const restOfFirstName = name.slice(1).toLowerCase();
+            const formattedName = firstNameLetter + restOfFirstName
+            formattedNameArr.push(formattedName);
+        
+        }
+     req.body.product_name = formattedNameArr.join(" ")
 
-        const firstNameLetter = firstName.charAt(0).toUpperCase()
 
-        const restOfFirstName = firstName.slice(1).toLowerCase();
-
-        const convertedFirstName = firstNameLetter + restOfFirstName
-
-        req.body.name = `${convertedFirstName} ${lastName}`;
-
+        
         next()
 
     }else {

@@ -30,7 +30,7 @@ makeUp.get("/:makeupID", async (req, res) => {
         res.status(404).json({ error: "id must be numeric" })
     }
 })
-
+//checkname update 
 
 makeUp.post("/", checkName, async (req, res) => {
     const body = req.body
