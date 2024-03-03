@@ -26,8 +26,8 @@ const getOneMakeup = async (makeupId) => {
 const updateMakeup = async (makeupId, body) => {
 
     try {
-        const updatedMakeup = await db.one("UPDATE makeup SET product_name=$1 , price=$2, instock=$3, color=$4 WHERE id=$5 RETURNING *", [body.product_name,
-        body.price, body.instock, body.color, makeupId])
+        const updatedMakeup = await db.one("UPDATE makeup SET product_name=$1 , price=$2, instock=$3, color=$4 image_url=$5 WHERE id=$6 RETURNING *", [body.product_name,
+        body.price, body.instock, body.color, body.image_url, makeupId])
         return updatedMakeup
 
     } catch (error) {
@@ -54,7 +54,7 @@ const createMakeup = async (valueObj) => {
 
     try {
 
-        const newMakeup = await db.one("INSERT INTO makeup (product_name,price,instock,color )VALUES ($1,$2,$3,$4) RETURNING * ", [valueObj.product_name, valueObj.price, valueObj.instock, valueObj.color])
+        const newMakeup = await db.one("INSERT INTO makeup (product_name,price,instock,color , image_url) VALUES ($1,$2,$3,$4,$5) RETURNING * ", [valueObj.product_name, valueObj.price, valueObj.instock, valueObj.color, valueObj.image_url])
         return newMakeup
     } catch (error) {
         return error
